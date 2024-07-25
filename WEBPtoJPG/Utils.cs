@@ -6,24 +6,30 @@ namespace WEBPtoJPG
 {
     internal class Utils
     {
+        static void addKey(string key, string value)
+        {
+            RegistryKey k = Registry.ClassesRoot.CreateSubKey(key);
+            k.SetValue("", value);
+            k.Close();
+        }
+
         public static bool SetFolderContextMenu()
         {
             try
             {
-                RegistryKey k = Registry.ClassesRoot.CreateSubKey(@".webp\Shell\Convert...\command");
-                k.SetValue("", $"\"{System.Reflection.Assembly.GetExecutingAssembly().Location}\" \"%1\"");
-                k.Close();
-                k = Registry.ClassesRoot.CreateSubKey(@".webp\Shell\Convert auto\command");
-                k.SetValue("", $"\"{System.Reflection.Assembly.GetExecutingAssembly().Location}\" \"%1\" -auto");
-                k.Close();
-                k = Registry.ClassesRoot.CreateSubKey(@".webp\Shell\Convert auto all in folder\command");
-                k.SetValue("", $"\"{System.Reflection.Assembly.GetExecutingAssembly().Location}\" \"%1\" -autoall");
-                k.Close();
+                addKey(@".webp\Shell\Convert...\command", $"\"{System.Reflection.Assembly.GetExecutingAssembly().Location}\" \"%1\"");
+                addKey(@".webp\Shell\Convert auto\command", $"\"{System.Reflection.Assembly.GetExecutingAssembly().Location}\" \"%1\" -auto");
+                addKey(@".webp\Shell\Convert auto all in folder\command", $"\"{System.Reflection.Assembly.GetExecutingAssembly().Location}\" \"%1\" -autoall");
+
+                addKey(@"SystemFileAssociations\.webp\Shell\Convert...\command", $"\"{System.Reflection.Assembly.GetExecutingAssembly().Location}\" \"%1\"");
+                addKey(@"SystemFileAssociations\.webp\Shell\Convert auto\command", $"\"{System.Reflection.Assembly.GetExecutingAssembly().Location}\" \"%1\" -auto");
+                addKey(@"SystemFileAssociations\.webp\Shell\Convert auto all in folder\command", $"\"{System.Reflection.Assembly.GetExecutingAssembly().Location}\" \"%1\" -autoall");
+
                 return true;
             }
             catch (Exception e)
             {
-                MessageBox.Show(e.Message);
+                MessageBox.Show(e.Message + "\r\nTry to run app as administrator");
                 return false;
             }
         }

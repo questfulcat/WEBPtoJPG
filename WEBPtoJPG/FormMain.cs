@@ -6,6 +6,8 @@ namespace WEBPtoJPG
 {
     public partial class FormMain : Form
     {
+        const string appVersion = "0.2";
+
         Converter converter;
         Settings settings = new Settings();
         
@@ -13,6 +15,7 @@ namespace WEBPtoJPG
         {
             InitializeComponent();
             converter = new Converter(log);
+            this.Text += " v" + appVersion; 
 
             loadSettings();
             this.FormClosing += (s, e) => saveSettings();
@@ -113,7 +116,7 @@ namespace WEBPtoJPG
 
         private void buttonAbout_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("2024 MIT License\r\ndeveloper: questfulcat\r\nhttps://github.com/questfulcat/webptojpg", "WEBP to JPG (GUI for dwebp)", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show($"Version {appVersion}\r\n2024 MIT License\r\ndeveloper: questfulcat\r\nhttps://github.com/questfulcat/webptojpg", "WEBP to JPG (GUI for dwebp)", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
     }
 }
