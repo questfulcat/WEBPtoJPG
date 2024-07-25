@@ -13,17 +13,18 @@ namespace WEBPtoJPG
             k.Close();
         }
 
-        public static bool SetFolderContextMenu()
+        public static bool SetWEBPExtensionContextMenu()
         {
             try
             {
-                addKey(@".webp\Shell\Convert...\command", $"\"{System.Reflection.Assembly.GetExecutingAssembly().Location}\" \"%1\"");
-                addKey(@".webp\Shell\Convert auto\command", $"\"{System.Reflection.Assembly.GetExecutingAssembly().Location}\" \"%1\" -auto");
-                addKey(@".webp\Shell\Convert auto all in folder\command", $"\"{System.Reflection.Assembly.GetExecutingAssembly().Location}\" \"%1\" -autoall");
+                string path = System.Reflection.Assembly.GetExecutingAssembly().Location;
+                addKey(@".webp\Shell\Convert...\command", $"\"{path}\" \"%1\"");
+                addKey(@".webp\Shell\Convert auto\command", $"\"{path}\" \"%1\" -auto");
+                addKey(@".webp\Shell\Convert auto all in folder\command", $"\"{path}\" \"%1\" -autoall");
 
-                addKey(@"SystemFileAssociations\.webp\Shell\Convert...\command", $"\"{System.Reflection.Assembly.GetExecutingAssembly().Location}\" \"%1\"");
-                addKey(@"SystemFileAssociations\.webp\Shell\Convert auto\command", $"\"{System.Reflection.Assembly.GetExecutingAssembly().Location}\" \"%1\" -auto");
-                addKey(@"SystemFileAssociations\.webp\Shell\Convert auto all in folder\command", $"\"{System.Reflection.Assembly.GetExecutingAssembly().Location}\" \"%1\" -autoall");
+                addKey(@"SystemFileAssociations\.webp\Shell\Convert...\command", $"\"{path}\" \"%1\"");
+                addKey(@"SystemFileAssociations\.webp\Shell\Convert auto\command", $"\"{path}\" \"%1\" -auto");
+                addKey(@"SystemFileAssociations\.webp\Shell\Convert auto all in folder\command", $"\"{path}\" \"%1\" -autoall");
 
                 return true;
             }

@@ -111,7 +111,7 @@ namespace WEBPtoJPG
         private void buttonAddContextMenu_Click(object sender, EventArgs e)
         {
             if (MessageBox.Show("Add windows context menu item 'convert' for webp files?", "Accept", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.Cancel) return;
-            Utils.SetFolderContextMenu();
+            Utils.SetWEBPExtensionContextMenu();
         }
 
         private void buttonAbout_Click(object sender, EventArgs e)
